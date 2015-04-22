@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='http://fonts.useso.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title> 使用nolearn构建ANN神经网络完成数字识别挑战 </title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1> XiaoGo's Space </h1>
+        <h2> Welcome ! </h2>
+        <a href="https://github.com/pietromenna/jekyll-architect-theme" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          
+          <h2>使用nolearn构建ANN神经网络完成数字识别挑战</h2>
+<p class="meta">06 Apr 2015</p>
+
+<p>对于我这样的data science新手来说，kaggle是一个很好的练手平台，</p>
+
+<p>在kaggle的starter难度中，数字识别是一个比较有代表性的项目。</p>
+
+<p>昨晚使用nolearn构建ANN神经网络，成功将识别率提高到98%. 很高兴丫~ </p>
+
+<p>以下是代码:</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">csv</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">pandas</span>
+<span class="kn">from</span> <span class="nn">nolearn.dbn</span> <span class="kn">import</span> <span class="n">DBN</span>
+
+<span class="n">testRest</span> <span class="o">=</span> <span class="mi">3000</span>
+
+<span class="c"># 导入csv文件并转换为array.</span>
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;loading txt...&quot;</span><span class="p">)</span>
+<span class="n">fil</span> <span class="o">=</span> <span class="nb">file</span><span class="p">(</span><span class="s">&#39;train.csv&#39;</span><span class="p">)</span>
+<span class="n">fil</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+
+<span class="n">txt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">fil</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s">&#39;,&#39;</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">txt</span>
+
+<span class="n">digits_label</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">data</span><span class="p">])</span>
+<span class="n">digits_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">/</span><span class="mf">255.0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">data</span><span class="p">])</span>
+
+<span class="c">#digits_image = map(binaryzation, digits_image)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;file loading ok , prepare to train model&quot;</span><span class="p">)</span>
+
+<span class="c"># object of ANN model. </span>
+<span class="c"># Input 784 , Hidden 1000,500 Output 10.</span>
+
+<span class="n">clf</span> <span class="o">=</span> <span class="n">DBN</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">digits_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1000</span><span class="p">,</span><span class="mi">500</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+    <span class="n">learn_rates</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+    <span class="n">learn_rate_decays</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span>
+    <span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="p">)</span>
+
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">digits_image</span><span class="p">[:</span><span class="o">-</span><span class="n">testRest</span><span class="p">],</span><span class="n">digits_label</span><span class="p">[:</span><span class="o">-</span><span class="n">testRest</span><span class="p">])</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">digits_image</span><span class="p">[</span><span class="o">-</span><span class="n">testRest</span><span class="p">:])</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;the err rate : </span><span class="si">%.2f</span><span class="s"> </span><span class="si">%%</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="p">((</span><span class="n">result</span> <span class="o">!=</span> <span class="n">digits_label</span><span class="p">[</span><span class="o">-</span><span class="n">testRest</span><span class="p">:])</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">testRest</span><span class="p">))</span> <span class="p">)</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="s">&quot;the result num </span><span class="si">%.2f</span><span class="s"> &quot;</span><span class="o">%</span><span class="p">(</span><span class="n">result</span><span class="o">!=</span> <span class="n">digits_label</span><span class="p">[</span><span class="o">-</span><span class="n">testRest</span><span class="p">:])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="p">)</span>
+
+<span class="n">testTxt</span> <span class="o">=</span> <span class="nb">file</span><span class="p">(</span><span class="s">&#39;test.csv&#39;</span><span class="p">)</span>
+<span class="n">testTxt</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+
+<span class="n">testData</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">testTxt</span><span class="p">,</span><span class="n">delimiter</span><span class="o">=</span><span class="s">&#39;,&#39;</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
+<span class="n">result2</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">testData</span><span class="p">)</span>
+<span class="n">out</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;outputann.csv&#39;</span><span class="p">,</span><span class="s">&#39;wb&#39;</span><span class="p">)</span>
+<span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">u&#39;&quot;ImageId&quot;,&quot;Label&quot;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">result2</span><span class="p">:</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">count</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot;,&quot;</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">+=</span><span class="mi">1</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">r&#39;&quot;&#39;</span><span class="o">+</span><span class="nb">repr</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s">r&#39;&quot;&#39;</span><span class="p">)</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">)</span>
+<span class="n">out</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="nb">exit</span><span class="p">()</span>
+</code></pre></div>
+
+
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/pietromenna/jekyll-architect-theme/archive/master.zip" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/pietromenna/jekyll-architect-theme/archive/master.tar.gz" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/jasonlong/architect-theme">architect-theme</a> is maintained by <a href="https://github.com/jasonlong">jasonlong</a>.</p>
+
+          <p class="repo-owner"><a href="https://github.com/pietromenna/jekyll-architect-theme">jekyll-architect-theme</a> is maintained by <a href="https://github.com/pietromenna">pietromenna</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  </body>
+</html>
