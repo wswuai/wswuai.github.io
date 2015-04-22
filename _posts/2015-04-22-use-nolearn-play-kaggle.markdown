@@ -71,5 +71,3 @@ for i in result2:
 out.close()
 exit()
 ```
-
-
