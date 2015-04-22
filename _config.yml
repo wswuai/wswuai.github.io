@@ -5,7 +5,7 @@ paginate_path: "page:num"
 exclude: ["README.md"] # files to exclude
 highlighter: pygments
 markdown: redcarpet
-
+title: XiaoGo
 
 defaults:
   -
@@ -19,11 +19,11 @@ author:
   name: XiaoGo
   email: goumanyu@qq.com
   github: wswuai
-  twitter: wswuai
-  pinterest: wswuai
-  linkedin: wswuai
+# twitter: wswuai
+# pinterest: wswuai
+# linkedin: wswuai
   bio: Data / Hacking
-  email_md5: 1111
+  email_md5: 11111111111111
 
 rss_path: feed.xml
 categories_path: categories.html
