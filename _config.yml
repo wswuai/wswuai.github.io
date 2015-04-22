@@ -12,9 +12,9 @@ defaults:
     scope:
       path: "" # empty string for all files
     values:
-      title: dbyll
+      title: XiaoGo's Space
 
-description: Stylish Jekyll Theme
+description: XiaoGo's Space
 author:
   name: XiaoGo
   email: goumanyu@qq.com
