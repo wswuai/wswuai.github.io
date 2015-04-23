@@ -3,6 +3,7 @@ layout: post
 title:  "使用nolearn构建ANN神经网络完成数字识别挑战"
 date:   2015-04-06 11:40:56
 categories: 数据挖掘
+tags: DM python ann
 ---
 
 对于我这样的data science新手来说，kaggle是一个很好的练手平台，在kaggle的starter难度中，数字识别是一个比较有代表性的项目。昨晚使用nolearn构建ANN神经网络，成功将识别率提高到98%. 很高兴丫~ 
