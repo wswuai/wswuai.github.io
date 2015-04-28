@@ -1,0 +1,32 @@
+---
+layout: post
+title:  "将sklearn的模型持久化."
+date:   2015-04-28 20:16:00
+categories: python
+tags: python sklearn
+---
+
+
+在用sklearn训练好一个模型之后，如何将它持久化到硬盘中，并随时反序列化回来呢？
+
+今天要介绍的就是sklearn.external.joblib了.
+
+pythoner平时对pickle可能更加熟悉, pickle可以对python的对象进行序列化、反序列化操作.
+
+joblib工具与pickle不同的是，joblib对sklearn创建的对象支持更加友好.
+
+对于一个15000维，经过将近70万文本分类数据的训练之后，使用pickle对模型进行序列化大约需要270MB的存储空间，
+而使用joblib仅需要50MB的空间.
+
+代码如下:
+
+```python
+import sklearn.externals.joblib as jl
+# 序列化操作
+jl.dump(model,’model.obj’)
+
+# 反序列化操作
+model = jl.load('model.obj')
+```
+
+是不是很简单呢?
