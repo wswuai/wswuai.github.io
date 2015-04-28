@@ -23,10 +23,10 @@ joblib工具与pickle不同的是，joblib对sklearn创建的对象支持更加�
 ```python
 import sklearn.externals.joblib as jl
 # 序列化操作
-jl.dump(model,’model.obj’)
+jl.dump(model,'model.pkl')
 
 # 反序列化操作
-model = jl.load('model.obj')
+model = jl.load('model.pkl')
 ```
 
 是不是很简单呢?
