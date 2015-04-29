@@ -7,7 +7,11 @@ tags: DM python ann
 ---
 
 
-对于我这样的data science新手来说，kaggle是一个很好的练手平台，在kaggle的starter难度中，数字识别是一个比较有代表性的项目。昨晚使用nolearn构建ANN神经网络，成功将识别率提高到98%. 很高兴丫~ 
+对于我这样的data science新手来说，kaggle是一个很好的练手平台，在kaggle的starter难度中，数字识别是一个比较有代表性的项目。
+昨晚使用nolearn构建ANN神经网络，识别率可以达到到98%. 
+
+
+( 做到100%的那位同学，为何你如此神猛...)
 
 ---
 以下是代码:
