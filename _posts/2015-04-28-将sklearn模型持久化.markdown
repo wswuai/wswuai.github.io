@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "将sklearn的模型持久化."
+title:  "使用joblib持久化sklearn模型"
 date:   2015-04-28 20:16:00
 categories: python
 tags: python sklearn
