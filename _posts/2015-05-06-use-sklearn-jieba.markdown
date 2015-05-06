@@ -1,3 +1,11 @@
+---
+layout: post
+title:  "使用sklearn + jieba中文分词构建文本分类器"
+date:   2015-04-06 11:40:56
+categories: 数据挖掘
+tags: python 文本分类 数据挖掘
+---
+
 jieba是一个优秀的中文分词模块，使用python编写，并在Github上开源。
 使用jieba分词可以将一整串的中文句式切分为独立的语言元素。
 
