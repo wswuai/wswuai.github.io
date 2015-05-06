@@ -59,16 +59,21 @@ if __name__=='__main__':
     catedict = {}
     catelist = []
     memolist = []
+    #The target category. suck as 1 -> "晚餐"  , 2 -> "午餐"
     for i in reader :
         catelist +=[  [i[0],int(i[1]) ]  ] 
     catedict = dict(catelist)
     #init vars
+    #the train data frame.
     reader = open('finished.csv','r')
     ctr = 0
+    #that MODEL.
     gnb = nb.MultinomialNB(alpha = 0.01)
+    #Hashing Trick, transfrom dict -> vector
     fh = sklearn.feature_extraction.FeatureHasher(n_features=15000,non_negative=True,input_type='string')
     kvlist = []
     targetlist = []
+    # use partial fitting because of big data frame.
     for col in reader:
         line = col.split(',')
         if(len(line) == 2):
@@ -79,6 +84,7 @@ if __name__=='__main__':
             sys.stdout.write('\r' + repr(ctr) + ' rows has been read   ')
             sys.stdout.flush()
         if(ctr%100000==0):
+
             print("\npartial fitting...")
             X = fh.fit_transform(kvlist)
             gnb.partial_fit(X,targetlist,classes = [i for i in catedict.viewvalues()])
@@ -89,27 +95,9 @@ if __name__=='__main__':
             targetlist = []
             kvlist = []
 
-"""
-    kvlist = []
-    targetlist = []
-    for i in memolist:
-        if(catedict.has_key(i[1])):
-            kvlist += [ [t for t in clipper(i[0])] ]
-            targetlist += [ catedict[i[1]] ]
-        print(cnt)
-        cnt+=1
-    fh = sklearn.feature_extraction.FeatureHasher(n_features=15000,non_negative=True,input_type='string')
-
-
-    X = fh.fit_transform(kvlist)
+    #finally , save the model
+    jl.dumps(gnb,'final.pkl')
+    #you can use the model and feature hasher another place to predict text category.
     
-
-    gnb = nb.MultinomialNB()
-    gnb.fit(X,targetlist)
-    result = gnb.predict(X)
-    accuracy = ((result == targetlist).sum() ) / float(len(targetlist))
-    print("accuracy : %.2f" % accuracy)
-    """
-
 
 ```
