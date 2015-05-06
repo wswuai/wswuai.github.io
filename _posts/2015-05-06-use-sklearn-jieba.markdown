@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "使用sklearn + jieba中文分词构建文本分类器"
-date:   2015-04-06 11:40:56
+date:   2015-05-06 10:44:56
 categories: 数据挖掘
 tags: python 文本分类 数据挖掘
 ---
