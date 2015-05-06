@@ -106,3 +106,6 @@ if __name__=='__main__':
 
 ###参考文献
 
+* [sklearn document](http://scikit-learn.org/)
+* [jieba mainpage](https://github.com/fxsjy/jieba)
+* [word bag feature](http://ju.outofmemory.cn/entry/74958)
