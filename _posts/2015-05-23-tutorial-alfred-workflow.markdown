@@ -8,28 +8,26 @@ tags: python alfred
 
 小帽子alfred是mac上最为传奇的效率作品， 今天，我们一起来探索alfred workflow 的世界吧.
 
-## 1. alfred 简介
+# 1. alfred 简介
 小帽子是 Mac 平台上最为传奇的效率作品，誉为神兵利器毫不为过。
 
 由于中文网络上尚无系统的alfred workflow 开发教程，便有了写一个教程的心思，以期抛砖引玉，为alfred吸引更多的开发者加入。
 
 -------
 
-## 2.alfred 插件开发
+# 2.alfred 插件开发
 
-### 2.1 alfred 插件开发概述
-
--------
+## 2.1 alfred 插件开发概述
 
 Workflow 是alfred2.0推出的最激动人心的特性，通过与脚本语言的交互，workflow可以支持任意操作，把您日常的重复性事务封装在脚本中，大大的提高工作效率。
 
 Workflow 支持php、bash、perl、ruby以及python作为脚本语言，并内置脚本语言解释器，并通过stdio的形式在各个脚本模块中传递参数。
 
-在代码中插入 #{query}块可以接收上一个脚本输出的内容。形成完整的控制链条。 最后由alfred输出至 Output 模块， 在Output模块中， 我们可以启动浏览器、将内容复制到剪切板、 启动通知中心、甚至执行bash脚本。
+在代码中插入 {query}块可以接收上一个脚本输出的内容。形成完整的控制链条。 最后由alfred输出至 Output 模块， 在Output模块中， 我们可以启动浏览器、将内容复制到剪切板、 启动通知中心、甚至执行bash脚本。
 
 在日常的使用中，我们通常通过关键字来调用某一模块，例如“find xxx" 即是调用find内建模块 query内容为xxx。 在workflow的开发中， 开发者可以自定义自己编写模块的关键字，只要不与其他模块冲突即可。
  
-在workflow的结构中，数据流通过alfred的控制线进行传递，每一个脚本模块的STDIO输出会被alfred替换到 下一个脚本的#{query}块中。
+在workflow的结构中，数据流通过alfred的控制线进行传递，每一个脚本模块的STDIO输出会被alfred替换到 下一个脚本的{query}块中。
 
 如下图所示：
 
@@ -44,7 +42,7 @@ Workflow 支持php、bash、perl、ruby以及python作为脚本语言，并内�
 通过yd作为关键字启动workflow， 如果直接回车，使用OpenURL，启动youdao网站。如果使用Cmd+回车的方式，
 则执行Run Scirpt 并将其输出到剪切板，并用Post Notification的方式，在通知中心显示。
 
-### 2.2 Alfred的XML格式概述
+## 2.2 Alfred的XML格式概述
 
 -------
 
@@ -76,22 +74,22 @@ arg：作为下一个模块的参数传递
 &lt;subtitle> 该行字标题位置，会被显示为灰色小字
 &lt;icon> 该行图标的文件名，其大小为64X64 pixels
 
-### 2.3 #{query} 与 stdio
+## 2.3 {query} 与 stdio
 
 -------
 
-     alfred并没有官方示例，所以模块间数据是如何传递的，曾经困扰我很久。
+alfred模块间数据是如何传递的，曾经困扰我很久。
 
-     其数据流是这样的， 你在关键字之后的文字会作为第一个模块的query, 由alfred替换代码中#{query}的位置， 该模块print到stdio的数据会像第一个模块一样，去替换第二个模块的#{query}位置，直到最后生成XML文件， 最后一步是不一样的，也就是xml文件输出之后， 用户敲击不同item， alfred将把该item的arg属性的值传递给下一个模块。
+其数据流是这样的， 你在关键字之后的文字会作为第一个模块的query, 由alfred替换代码中{query}的位置， 该模块print到stdio的数据会像第一个模块一样，去替换第二个模块的{query}位置，直到最后生成XML文件， 只有最后一步是不一样的，也就是xml文件输出之后， 用户在不同的条目上按回车， alfred将把该条目对应的item的arg属性的值传递给下一个模块。
 
 
-### 2.4 python 开发示例
+## 2.4 python 开发示例
 
 -------
 
 下面，我将用开发一个百度词典为例，详细讲解开发alred插件中的每一个步骤。
 
-##2.4.1 Script Filter
+###2.4.1 Script Filter
 Script Filter 的作用是提供一个Alfred workflow的起始点，可以通过点击右上角的加号，从Inputs中选择。
 
 它的界面如下图所示：
@@ -250,7 +248,7 @@ if __name__=='__main__':
 
 
 
-##2.4.2 Output
+###2.4.2 Output
 
 output  是 alfred 中的『执行器』。
 
