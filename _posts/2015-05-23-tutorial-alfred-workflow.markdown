@@ -6,7 +6,7 @@ categories: python
 tags: python alfred
 ---
 
-小帽子alfred是mac上最为传奇的效率作品， 今天，我们一起来探索alfred workflow 的世界吧.
+小帽子alfred是mac上最为传奇的效率作品， 今天，我们一起来探索alfred workflow 的世界吧!
 
 # 1. alfred 简介
 小帽子是 Mac 平台上最为传奇的效率作品，誉为神兵利器毫不为过。
