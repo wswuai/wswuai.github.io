@@ -56,12 +56,19 @@ Elasticsearch 并不是单纯的全文搜索这么简单。我们将向你介绍
 
 #3. 部署elasticsearch
 1、JAVA依赖
+
 elasticsearch依赖于JRE1.8，故在部署elasticsearch之前请先确认JAVA1.8的运行环境。并将环境变量JAVA_HOME 指向JRE的目录。
+
 2、elasticsearch.yml配置
+
 cluster.name : testcluster
+
 node.name : testnode
+
 elasticsearch本身的默认配置就已经优化的不错，没有问题的情况下可以保持默认配置。
+
 需要注意的一点是，如果你想使用自定义的排序方式， 就需要开启groovy脚本支持，配置如下
+
 script.groovy.sandbox.enabled: true
 
 
