@@ -56,6 +56,7 @@ Elasticsearch 并不是单纯的全文搜索这么简单。我们将向你介绍
 
 
 #3. 部署elasticsearch
+
 ## 3.1 JAVA依赖
 
 elasticsearch依赖于JRE1.8，故在部署elasticsearch之前请先确认JAVA1.8的运行环境。并将环境变量JAVA_HOME 指向JRE的目录。
