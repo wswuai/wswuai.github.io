@@ -41,7 +41,8 @@ tags: python elasticsearch
 中文分词指的是使用计算机自动对中文文本进行词语的切分，即像英文那样使得中文句子中的词之间有空格以标识。中文自动分词被认为是中文自然语言处理中的一个最基本的环节。
 中文与英文有一个非常大的区别，就是中文是没有空格来分割单词的，这就造成在机器理解中文的困难.
 
-1.3 Lucene
+## 1.3 Lucene
+
 Lucene是Apache基金会下的王牌开源项目之一， 它由java编写， 提供对全文检索的各种支持，封装层次较低，可以根据所需进行自定义的扩展，学习曲线比较陡峭，
 Solr与elasticsearch均基于Lucene开发。 Lucene也是全文检索领域事实上的王者。如同Linux之于服务器，Windows之于桌面办公。
 
@@ -55,11 +56,11 @@ Elasticsearch 并不是单纯的全文搜索这么简单。我们将向你介绍
 
 
 #3. 部署elasticsearch
-1、JAVA依赖
+## 3.1 JAVA依赖
 
 elasticsearch依赖于JRE1.8，故在部署elasticsearch之前请先确认JAVA1.8的运行环境。并将环境变量JAVA_HOME 指向JRE的目录。
 
-2、elasticsearch.yml配置
+## 3.2 elasticsearch.yml配置
 
 cluster.name : testcluster
 
@@ -67,8 +68,10 @@ node.name : testnode
 
 elasticsearch本身的默认配置就已经优化的不错，没有问题的情况下可以保持默认配置。
 
-需要注意的一点是，如果你想使用自定义的排序方式， 就需要开启groovy脚本支持，配置如下
+需要注意的一点是，如果你想使用自定义的排序方式， 就需要开启groovy脚本支持，配置如下:
 
 script.groovy.sandbox.enabled: true
 
+如果你想简单点，可以使用Docker部署elasticsearch环境：
 
+Docker run -d -p 9200:9200 -p 9300:9300 -v $pwd/esdata:/usr/share/elasticsearch/data elasticsearch:latest
