@@ -12,9 +12,9 @@ defaults:
     scope:
       path: "" # empty string for all files
     values:
-      title: XiaoGoの胡言乱语
+        title: 小勾の胡言乱语
 
-description: XiaoGoの胡言乱语
+description: 小勾の胡言乱语
 author:
   name: XiaoGo
   email: me@myg0u.com
