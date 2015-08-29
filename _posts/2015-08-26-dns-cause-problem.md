@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "记一次DNS引发的Bug"
+title:  "记一次DNS引发的问题"
 date:   2015-08-26  16:14:47
 categories: python
 tags: python elasticsearch
