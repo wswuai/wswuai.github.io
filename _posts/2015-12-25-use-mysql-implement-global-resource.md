@@ -128,7 +128,7 @@ class Resource(threading.Thread):
 
 search_Sql 一般是形如 :
 
-```  sql
+```  python
 
     search_Sql = 'SELECT * FROM some_table WHERE busy_before < "%s"'
 
@@ -141,7 +141,7 @@ lock_Sql 一般是形如 :
 
 ``` python
 
-lock_Sql = 'UPDATE some_table SET busy_before = "%s" WHERE id=%s AND busy_before = "%s"'
+    lock_Sql = 'UPDATE some_table SET busy_before = "%s" WHERE id=%s AND busy_before = "%s"'
 
 ```
 
