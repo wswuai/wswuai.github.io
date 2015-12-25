@@ -128,14 +128,16 @@ class Resource(threading.Thread):
 
 search_Sql 一般是形如 :
 
-``` python
+```  sql
 
     search_Sql = 'SELECT * FROM some_table WHERE busy_before < "%s"'
 
 ```
+
 作用是，搜索资源表有没有空闲的资源.
 
 lock_Sql 一般是形如 :
+
 
 ``` python
 
