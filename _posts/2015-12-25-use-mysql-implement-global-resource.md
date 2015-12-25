@@ -127,15 +127,22 @@ class Resource(threading.Thread):
 以上代码实现了一个使用MySQL来进行分布式调度的资源抽象类。
 
 search_Sql 一般是形如 :
-```
-search_Sql = 'SELECT * FROM some_table WHERE busy_before < "%s"'
+
+``` python
+
+    search_Sql = 'SELECT * FROM some_table WHERE busy_before < "%s"'
+
 ```
 作用是，搜索资源表有没有空闲的资源.
 
 lock_Sql 一般是形如 :
-```
+
+``` python
+
 lock_Sql = 'UPDATE some_table SET busy_before = "%s" WHERE id=%s AND busy_before = "%s"'
+
 ```
+
 作用是，将busy_before字段置位当前时间后推几分钟（自定），代表该资源已被占用。
 
 这样设计的原因是，不单纯使用一个bit来表示当前资源的状态，而是使用一个不断更新的busy_before字段，
