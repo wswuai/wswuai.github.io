@@ -24,7 +24,7 @@ UPDATE语句会返回影响数据行数的值。
 
 ###三、示例代码
 
-```
+``` python
 class Resource(threading.Thread):
     search_Sql = None
     lock_Sql = None
