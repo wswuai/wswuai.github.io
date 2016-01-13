@@ -30,4 +30,5 @@ categories_path: categories.html
 tags_path: tags.html
 about_path: about_me.html
 
-BASE_PATH:
+gems : [ jekyll-paginate ]
+BASE_PATH : 
