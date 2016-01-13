@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "使用MySQL实现分布式资源调度"
-date:   2015-12-25 21:00:56
-categories: 分布式
-tags: MySQL 分布式
+title:  "GraphX 与Hbase的整合实践"
+date:   2016-01-10 18:00:00
+categories: Spark 分布式
+tags: 分布式 Spark
 ---
 
 使用Hbase来存储Graphx的节点与边，是一种很棒的实践。
