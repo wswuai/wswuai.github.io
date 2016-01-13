@@ -1,3 +1,5 @@
+
+
 # Glad to see u.
 
 ``` scala
@@ -13,10 +15,6 @@ object XiaoGo{
                 Hadoop Engineer
     Company    = 
                 Kingdee
-    QQ         = 
-                32911290
-    Tel        = 
-                18129823435
     GoodAt     = 
                 (Hadoop, C  , Java)
     Knowing    =
