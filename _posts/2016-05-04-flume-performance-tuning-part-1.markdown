@@ -93,11 +93,11 @@ Batch Size 是由Sink配置的。Batch Size越大， Channel也就越快。 文�
 
 #### 不同情况下的不同Batch Size
 
-由于Batch Size涉及到 性能/重复的权衡，我通常在不同应用场景下选用不同的batch Size。比如使用Flume 的HBase Sink ，经常采用100的Batch Size来降低系统的延迟都懂。 使用HDFS Sink的时候， 我就见到许多人使用10000的Batch Size来提高系统的吞吐，因为他们可以在接下来的MapReduce将重复的数据剔除掉。 值得注意的是， 当使用HDFS Sink，而且需要用以一个大Batch Size来将数据写入HDFS， 一些其他的参数也需要相应的提高。其中一个参数就是hdfs.callTimeout， 它也许就需要提高到60s或更高来预防HDFS偶尔的高延迟。
+由于Batch Size涉及到 性能/重复的权衡，我通常在不同应用场景下选用不同的batch Size。比如使用Flume 的HBase Sink ，经常采用100的Batch Size来降低系统的延迟。 而使用HDFS Sink的时候， 我就见到许多人使用10000的Batch Size来提高系统的吞吐，因为他们可以在接下来的MapReduce将重复的数据剔除掉。 值得注意的是， 当使用HDFS Sink且用以一个比较大的Batch Size的时候， 一些其他的参数也需要相应的提高。其中一个参数就是hdfs.callTimeout， 它或许需要提高到60s或更高来预防HDFS偶尔的慢响应。
 
 另一方面，为了获取最佳性能，实践上会在收集端将Batch Size配置为1，channel也会配置为内存通道。并在下游的Flume Agent中配置比较大的Batch Size和文件通道，来获取更好的性能和可靠性保证。 为了获得更好的性能， 任意一层（包括应用层）都可以做一些尽可能的批量处理。
 
-配置参数与陷阱
+#### 配置参数与陷阱
 
 实际上我们在sink端配置的都是Batch Size，但是它们不一定叫同一个名。 对于HDFS来说，它的实际叫hdfs.batchSize（由于一些历史原因）。 为了让大家更好理解，我曾经建议叫hdfs.txnEventMax 。 由于历史原因，HDFS Sink，从单个事务中提取的事件数和单次写入到HDFS的事件数不是同一个参数。实践上，确实有一些小原因这两个参数不应该设置为同一个值。
 
